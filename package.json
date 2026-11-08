@@ -1,0 +1,12 @@
+{
+  "name": "ruta18-reservas-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node --env-file=.env scripts/build.mjs && npx serve dist",
+    "test": "node --test tests/"
+  },
+  "engines": { "node": ">=20.6" }
+}
