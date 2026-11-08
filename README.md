@@ -17,7 +17,8 @@ Una aplicación web donde el cliente reserva una mesa por su cuenta y ve la disp
 |---|---|
 | Aplicación en Vercel | _Pendiente (fase 6)_ |
 | Video de demostración | _Pendiente_ |
-| Archivo de Figma | _Pendiente_ |
+| Archivo de Figma | [Diseño](https://www.figma.com/design/cuSkj1NPd49957RoBRP3CU/ruta18_Mesas) · [Prototipo navegable](https://www.figma.com/proto/cuSkj1NPd49957RoBRP3CU/ruta18_Mesas?node-id=3-36551&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
+| Mockups de baja fidelidad | [docs/mockups/](docs/mockups/) |
 
 ## Tecnologías
 
