@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruta 18 · Reserva tu mesa en Bucaramanga</title>
+  <meta name="description" content="Reserva tu mesa en Ruta 18, Bucaramanga. Hamburguesas, sushi y platos a la carta. Mira la disponibilidad en tiempo real y confirma sin llamar.">
+  <meta name="theme-color" content="#1A1A2E">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="modulepreload" href="js/cliente.js">
+  <script type="module" src="js/cliente.js"></script>
+</head>
+<body>
+  <a class="saltar-contenido" href="#mesas">Saltar a las mesas</a>
+
+  <header class="encabezado">
+    <div class="contenedor">
+      <a class="logo" href="#inicio">Ruta18</a>
+      <button class="boton-icono menu-boton" id="menu-boton" type="button"
+              aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+        <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="navegacion" id="menu" aria-label="Principal" hidden>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#mesas">Mesas</a></li>
+          <li><a href="#carta">Carta</a></li>
+          <li><a href="#mesas">Reservar</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a class="enlace-admin" href="admin">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Presentación -->
+    <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+      <div class="contenedor">
+        <div class="hero-texto">
+          <p class="etiqueta">Bucaramanga · Santander</p>
+          <h1 id="hero-titulo">RUTA18</h1>
+          <p class="hero-eslogan" id="hero-eslogan">Hamburguesas · Sushi · Platos a la carta</p>
+          <a class="boton boton-primario" href="#mesas">Reserva tu mesa</a>
+          <p class="hero-horario" id="hero-horario">Consultando horario…</p>
+        </div>
+        <div class="hero-sello" aria-hidden="true">
+          <strong>18</strong>
+          <span>TU MESA. TU MOMENTO.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RF-01: mesas disponibles -->
+    <section class="seccion seccion-fondo" id="mesas" aria-labelledby="mesas-titulo">
+      <div class="contenedor">
+        <div class="seccion-cabecera">
+          <div>
+            <h2 id="mesas-titulo">Nuestras mesas</h2>
+            <p class="ayuda" id="mesas-resumen" aria-live="polite">Cargando mesas…</p>
+          </div>
+          <p class="etiqueta texto-suave" id="mesas-fecha"></p>
+        </div>
+        <div class="filtros" role="group" aria-label="Filtrar por zona" id="filtro-zona">
+          <button class="filtro" type="button" data-zona="todas" aria-pressed="true">Todas</button>
+          <button class="filtro" type="button" data-zona="terraza" aria-pressed="false">Terraza</button>
+          <button class="filtro" type="button" data-zona="salon" aria-pressed="false">Salón</button>
+        </div>
+        <div class="rejilla-mesas" id="lista-mesas" aria-busy="true">
+          <div class="esqueleto"></div>
+          <div class="esqueleto"></div>
+          <div class="esqueleto"></div>
+          <div class="esqueleto"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RF-07: carta digital -->
+    <section class="seccion" id="carta" aria-labelledby="carta-titulo">
+      <div class="contenedor">
+        <div class="seccion-cabecera">
+          <h2 id="carta-titulo">Carta</h2>
+        </div>
+        <div class="filtros" role="tablist" aria-label="Categorías de la carta" id="carta-pestanas">
+          <button class="filtro" type="button" role="tab" id="pestana-hamburguesas" data-categoria="hamburguesas" aria-selected="true" aria-controls="carta-panel">Hamburguesas</button>
+          <button class="filtro" type="button" role="tab" id="pestana-sushi" data-categoria="sushi" aria-selected="false" aria-controls="carta-panel" tabindex="-1">Sushi</button>
+          <button class="filtro" type="button" role="tab" id="pestana-platos" data-categoria="platos" aria-selected="false" aria-controls="carta-panel" tabindex="-1">Platos a la carta</button>
+          <button class="filtro" type="button" role="tab" id="pestana-bebidas" data-categoria="bebidas" aria-selected="false" aria-controls="carta-panel" tabindex="-1">Bebidas</button>
+        </div>
+        <div id="carta-panel" role="tabpanel" aria-labelledby="pestana-hamburguesas" tabindex="0">
+          <div class="esqueleto esqueleto-linea"></div>
+          <div class="esqueleto esqueleto-linea"></div>
+          <div class="esqueleto esqueleto-linea"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie" id="contacto">
+    <div class="contenedor">
+      <div>
+        <p class="pie-marca">Ruta18</p>
+        <p id="pie-direccion"></p>
+        <p>Tel. y WhatsApp: <a id="pie-telefono" href="#"></a></p>
+        <p class="pie-enlaces" id="pie-redes"></p>
+      </div>
+      <p class="texto-suave">© <span id="pie-anio">2026</span> Ruta 18</p>
+    </div>
+  </footer>
+
+  <!-- RF-02 a RF-06: modal de reserva -->
+  <div class="modal-fondo" id="modal-reserva" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+      <header class="modal-encabezado">
+        <h2 id="modal-titulo" tabindex="-1">Reservar</h2>
+        <button class="boton-icono" type="button" data-cerrar aria-label="Cerrar">
+          <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+
+      <div class="modal-cuerpo reserva-cuerpo" id="vista-reserva">
+        <div>
+          <!-- RF-03 -->
+          <section class="paso" aria-labelledby="paso-fecha">
+            <h3 id="paso-fecha">1. Elige la fecha</h3>
+            <div class="calendario-encabezado">
+              <p class="calendario-mes" id="calendario-mes" aria-live="polite"></p>
+              <div>
+                <button class="boton-icono" type="button" id="mes-anterior" aria-label="Mes anterior">
+                  <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>
+                </button>
+                <button class="boton-icono" type="button" id="mes-siguiente" aria-label="Mes siguiente">
+                  <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="calendario-semana" aria-hidden="true">
+              <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+            </div>
+            <div class="calendario-dias" id="calendario-dias" role="group" aria-labelledby="paso-fecha"></div>
+            <p class="ayuda calendario-nota" id="calendario-nota"></p>
+          </section>
+
+          <!-- RF-04 -->
+          <section class="paso" aria-labelledby="paso-hora">
+            <h3 id="paso-hora">2. Elige la hora</h3>
+            <p class="ayuda" id="horas-nota"></p>
+            <div class="franjas" id="franjas" role="group" aria-labelledby="paso-hora" aria-live="polite"></div>
+            <ul class="leyenda">
+              <li class="leyenda-libre">Libre</li>
+              <li class="leyenda-ocupado">Ocupado</li>
+              <li class="leyenda-seleccionado">Seleccionado</li>
+            </ul>
+          </section>
+        </div>
+
+        <!-- RF-05 -->
+        <form class="reserva-formulario" id="form-reserva" novalidate>
+          <h3>3. Tus datos</h3>
+          <div class="campo">
+            <label for="reserva-nombre">Nombre completo *</label>
+            <input class="entrada" id="reserva-nombre" name="nombre" type="text" autocomplete="name"
+                   maxlength="80" required aria-describedby="reserva-nombre-error">
+            <p class="error-campo" id="reserva-nombre-error" hidden></p>
+          </div>
+          <div class="campo">
+            <label for="reserva-contacto">Teléfono o WhatsApp (opcional)</label>
+            <input class="entrada" id="reserva-contacto" name="contacto" type="tel" autocomplete="tel"
+                   inputmode="tel" maxlength="20" aria-describedby="reserva-contacto-error">
+            <p class="error-campo" id="reserva-contacto-error" hidden></p>
+          </div>
+          <div class="campo">
+            <label for="reserva-personas">Número de personas *</label>
+            <input class="entrada" id="reserva-personas" name="personas" type="number" inputmode="numeric"
+                   min="1" step="1" required aria-describedby="reserva-personas-ayuda reserva-personas-error">
+            <p class="ayuda" id="reserva-personas-ayuda"></p>
+            <p class="error-campo" id="reserva-personas-error" hidden></p>
+          </div>
+
+          <section class="resumen" aria-labelledby="resumen-titulo">
+            <h4 id="resumen-titulo">Resumen</h4>
+            <dl class="lista-datos" id="resumen-datos"></dl>
+          </section>
+
+          <p class="alerta alerta-error reserva-alerta" id="reserva-error" role="alert" hidden></p>
+
+          <div class="modal-acciones">
+            <button class="boton boton-primario boton-ancho" id="boton-confirmar" type="submit" disabled>Confirmar reserva</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- RF-06 -->
+      <div class="modal-cuerpo confirmacion" id="vista-confirmacion" hidden></div>
+    </div>
+  </div>
+</body>
+</html>
