@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruta 18 · Panel de administración</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1A1A2E">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/admin.js"></script>
+</head>
+<body class="admin-cuerpo">
+
+  <!-- RF-08: acceso con contraseña -->
+  <main class="acceso" id="vista-acceso" hidden>
+    <div class="acceso-tarjeta">
+      <span class="logo">Ruta18</span>
+      <h1>Panel de administración</h1>
+      <form id="form-acceso" novalidate>
+        <div class="campo">
+          <label for="acceso-contrasena">Contraseña</label>
+          <div class="campo-contrasena">
+            <input class="entrada" id="acceso-contrasena" name="contrasena" type="password"
+                   autocomplete="current-password" required>
+            <button class="boton-icono" type="button" id="ver-contrasena" aria-label="Mostrar contraseña" aria-pressed="false">
+              <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="alerta alerta-error" id="acceso-error" role="alert" hidden></p>
+        <button class="boton boton-primario boton-ancho" id="boton-ingresar" type="submit">Ingresar</button>
+      </form>
+      <a class="acceso-volver" href="/">← Volver al sitio</a>
+    </div>
+  </main>
+
+  <!-- Panel: solo visible con sesión -->
+  <div class="panel" id="vista-panel" hidden>
+    <aside class="menu-admin">
+      <div class="menu-admin-marca">
+        <div>
+          <span class="logo">Ruta18</span>
+          <p class="etiqueta">Administración</p>
+        </div>
+        <button class="menu-admin-salir menu-admin-salir-movil" type="button" data-salir>Cerrar sesión</button>
+      </div>
+      <nav aria-label="Secciones del panel">
+        <ul class="menu-admin-lista">
+          <li><button class="menu-admin-item" type="button" data-ir="mesas">Mesas</button></li>
+          <li><button class="menu-admin-item" type="button" data-ir="horarios">Horarios</button></li>
+          <li><button class="menu-admin-item" type="button" data-ir="reservas">Reservas</button></li>
+          <li><button class="menu-admin-item" type="button" data-ir="carta">Carta</button></li>
+        </ul>
+      </nav>
+      <button class="menu-admin-salir menu-admin-salir-escritorio" type="button" data-salir>Cerrar sesión ↗</button>
+    </aside>
+
+    <main class="contenido-admin">
+      <!-- RF-09, RF-10, RF-13: mesas -->
+      <section id="seccion-mesas" aria-labelledby="titulo-mesas" hidden>
+        <p class="etiqueta migas">Administración / Mesas</p>
+        <div class="contenido-cabecera">
+          <div>
+            <h1 id="titulo-mesas" tabindex="-1">Mesas</h1>
+            <p id="mesas-descripcion">Administra las mesas del restaurante.</p>
+          </div>
+          <button class="boton boton-primario" type="button" id="nueva-mesa">+ Nueva mesa</button>
+        </div>
+        <div class="tabla-contenedor">
+          <table class="tabla">
+            <caption class="solo-lectores">Mesas del restaurante</caption>
+            <thead>
+              <tr><th scope="col">Mesa</th><th scope="col">Zona</th><th scope="col">Capacidad</th><th scope="col">Estado</th><th scope="col">Acciones</th></tr>
+            </thead>
+            <tbody id="tabla-mesas"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- RF-11: horarios -->
+      <section id="seccion-horarios" aria-labelledby="titulo-horarios" hidden>
+        <p class="etiqueta migas">Administración / Horarios</p>
+        <div class="contenido-cabecera">
+          <div>
+            <h1 id="titulo-horarios" tabindex="-1">Horarios</h1>
+            <p>Define qué días se atiende, en qué horario y cuánto dura cada reserva.</p>
+          </div>
+        </div>
+        <form id="form-horarios" novalidate>
+          <div class="tabla-contenedor">
+            <table class="tabla">
+              <caption class="solo-lectores">Horario de atención por día</caption>
+              <thead>
+                <tr><th scope="col">Día</th><th scope="col">Atiende</th><th scope="col">Apertura</th><th scope="col">Cierre</th><th scope="col">Duración de la reserva</th></tr>
+              </thead>
+              <tbody id="tabla-horarios"></tbody>
+            </table>
+          </div>
+          <div class="acciones-pie">
+            <button class="boton boton-primario" type="submit" id="guardar-horarios">Guardar cambios</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- RF-12: reservas -->
+      <section id="seccion-reservas" aria-labelledby="titulo-reservas" hidden>
+        <p class="etiqueta migas">Administración / Reservas</p>
+        <div class="contenido-cabecera">
+          <div>
+            <h1 id="titulo-reservas" tabindex="-1">Reservas</h1>
+            <p>Consulta las reservas y actualiza su estado.</p>
+          </div>
+        </div>
+        <form class="caja-filtros" id="form-filtros" novalidate>
+          <div class="campo">
+            <label for="filtro-fecha">Fecha</label>
+            <input class="entrada" id="filtro-fecha" type="date">
+          </div>
+          <div class="campo">
+            <label for="filtro-mesa">Mesa</label>
+            <select class="entrada" id="filtro-mesa">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div class="caja-filtros-acciones">
+            <button class="boton boton-primario" type="submit">Filtrar</button>
+            <button class="boton-texto" type="button" id="limpiar-filtros">Limpiar</button>
+          </div>
+        </form>
+        <div class="tabla-contenedor">
+          <table class="tabla">
+            <caption class="solo-lectores">Reservas</caption>
+            <thead>
+              <tr><th scope="col">Cliente</th><th scope="col">Contacto</th><th scope="col">Mesa</th><th scope="col">Fecha</th><th scope="col">Hora</th><th scope="col">Personas</th><th scope="col">Estado</th><th scope="col">Acción</th></tr>
+            </thead>
+            <tbody id="tabla-reservas"></tbody>
+          </table>
+        </div>
+        <div class="paginacion">
+          <p id="reservas-conteo" aria-live="polite"></p>
+          <nav aria-label="Páginas de reservas"><div class="paginacion-botones" id="paginacion"></div></nav>
+        </div>
+      </section>
+
+      <!-- RF-14: carta -->
+      <section id="seccion-carta" aria-labelledby="titulo-carta" hidden>
+        <p class="etiqueta migas">Administración / Carta</p>
+        <div class="contenido-cabecera">
+          <div>
+            <h1 id="titulo-carta" tabindex="-1">Carta</h1>
+            <p>Administra los platos y su disponibilidad.</p>
+          </div>
+          <button class="boton boton-primario" type="button" id="nuevo-plato">+ Nuevo plato</button>
+        </div>
+        <div class="caja-filtros">
+          <div class="campo">
+            <label for="filtro-categoria">Categoría</label>
+            <select class="entrada" id="filtro-categoria">
+              <option value="">Todas</option>
+            </select>
+          </div>
+        </div>
+        <div class="tabla-contenedor">
+          <table class="tabla">
+            <caption class="solo-lectores">Platos de la carta</caption>
+            <thead>
+              <tr><th scope="col">Plato</th><th scope="col">Categoría</th><th scope="col">Precio</th><th scope="col">Disponible</th><th scope="col">Acciones</th></tr>
+            </thead>
+            <tbody id="tabla-platos"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- RF-09: formulario de mesa -->
+  <div class="modal-fondo" id="modal-mesa" hidden>
+    <div class="modal modal-pequeno" role="dialog" aria-modal="true" aria-labelledby="mesa-titulo">
+      <header class="modal-encabezado">
+        <h2 id="mesa-titulo">Nueva mesa</h2>
+        <button class="boton-icono" type="button" data-cerrar aria-label="Cerrar">
+          <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+      <form class="modal-cuerpo" id="form-mesa" novalidate>
+        <div class="campo">
+          <label for="mesa-nombre">Nombre *</label>
+          <input class="entrada" id="mesa-nombre" type="text" maxlength="40" required aria-describedby="mesa-nombre-error">
+          <p class="error-campo" id="mesa-nombre-error" hidden></p>
+        </div>
+        <div class="campo">
+          <label for="mesa-zona">Zona *</label>
+          <select class="entrada" id="mesa-zona" required aria-describedby="mesa-zona-error"></select>
+          <p class="error-campo" id="mesa-zona-error" hidden></p>
+        </div>
+        <div class="campo">
+          <label for="mesa-capacidad">Capacidad (personas) *</label>
+          <input class="entrada" id="mesa-capacidad" type="number" inputmode="numeric" min="1" max="20" step="1" required aria-describedby="mesa-capacidad-error">
+          <p class="error-campo" id="mesa-capacidad-error" hidden></p>
+        </div>
+        <div class="campo">
+          <label for="mesa-foto">URL de la foto (opcional)</label>
+          <input class="entrada" id="mesa-foto" type="url" inputmode="url" placeholder="https://" aria-describedby="mesa-foto-ayuda mesa-foto-error">
+          <p class="ayuda" id="mesa-foto-ayuda">Debe empezar por https://. Si la dejas vacía se usa la imagen de respaldo.</p>
+          <p class="error-campo" id="mesa-foto-error" hidden></p>
+        </div>
+        <p class="alerta alerta-error" id="mesa-error" role="alert" hidden></p>
+        <div class="dialogo-acciones">
+          <button class="boton boton-secundario" type="button" data-cerrar>Cancelar</button>
+          <button class="boton boton-primario" type="submit" id="guardar-mesa">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- RF-14: formulario de plato -->
+  <div class="modal-fondo" id="modal-plato" hidden>
+    <div class="modal modal-pequeno" role="dialog" aria-modal="true" aria-labelledby="plato-titulo">
+      <header class="modal-encabezado">
+        <h2 id="plato-titulo">Nuevo plato</h2>
+        <button class="boton-icono" type="button" data-cerrar aria-label="Cerrar">
+          <svg class="icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+      <form class="modal-cuerpo" id="form-plato" novalidate>
+        <div class="campo">
+          <label for="plato-nombre">Nombre *</label>
+          <input class="entrada" id="plato-nombre" type="text" maxlength="80" required aria-describedby="plato-nombre-error">
+          <p class="error-campo" id="plato-nombre-error" hidden></p>
+        </div>
+        <div class="campo">
+          <label for="plato-categoria">Categoría *</label>
+          <select class="entrada" id="plato-categoria" required aria-describedby="plato-categoria-error"></select>
+          <p class="error-campo" id="plato-categoria-error" hidden></p>
+        </div>
+        <div class="campo">
+          <label for="plato-descripcion">Descripción</label>
+          <textarea class="entrada" id="plato-descripcion" maxlength="240" aria-describedby="plato-descripcion-contador plato-descripcion-error"></textarea>
+          <p class="ayuda contador" id="plato-descripcion-contador">0/240</p>
+          <p class="error-campo" id="plato-descripcion-error" hidden></p>
+        </div>
+        <div class="campo">
+          <label for="plato-precio">Precio en pesos *</label>
+          <input class="entrada" id="plato-precio" type="number" inputmode="numeric" min="0" step="1" placeholder="28000" required aria-describedby="plato-precio-error">
+          <p class="error-campo" id="plato-precio-error" hidden></p>
+        </div>
+        <label class="casilla"><input type="checkbox" id="plato-disponible" checked> Disponible en la carta</label>
+        <p class="alerta alerta-error" id="plato-error" role="alert" hidden></p>
+        <div class="dialogo-acciones">
+          <button class="boton boton-secundario" type="button" data-cerrar>Cancelar</button>
+          <button class="boton boton-primario" type="submit" id="guardar-plato">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <noscript><p class="contenedor">Activa JavaScript para usar el panel.</p></noscript>
+</body>
+</html>
