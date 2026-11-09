@@ -1,0 +1,26 @@
+Ruta 18 · Evidencia fase 2: pruebas de la base de datos
+Fecha: 2026-11-09 17:56 (hora de Colombia)
+Entorno: PostgreSQL 16.15 local, con los roles anon y authenticated de Supabase.
+Script: supabase/schema.sql, supabase/seed.sql y supabase/pruebas.sql
+Pendiente: repetir en el SQL Editor del proyecto real de Supabase y guardar captura.
+
+ n  |               caso                |       esperado        |       obtenido        | resultado 
+----+-----------------------------------+-----------------------+-----------------------+-----------
+  1 | Reserva válida Mesa 3, 14:00      | OK                    | OK                    | PASA
+  2 | Doble reserva, misma hora         | SLOT_OCUPADO          | SLOT_OCUPADO          | PASA
+  3 | Franja que se cruza, 14:30        | SLOT_OCUPADO          | SLOT_OCUPADO          | PASA
+  4 | Franja contigua, 15:30            | OK                    | OK                    | PASA
+  5 | Lunes cerrado                     | DIA_SIN_SERVICIO      | DIA_SIN_SERVICIO      | PASA
+  6 | 7 personas en mesa de 6           | CAPACIDAD_EXCEDIDA    | CAPACIDAD_EXCEDIDA    | PASA
+  7 | Hora 14:15                        | HORA_INVALIDA         | HORA_INVALIDA         | PASA
+  8 | Hora 21:00 con cierre a las 22:00 | HORA_FUERA_DE_HORARIO | HORA_FUERA_DE_HORARIO | PASA
+  9 | Fecha dentro de 40 días           | FECHA_FUERA_DE_RANGO  | FECHA_FUERA_DE_RANGO  | PASA
+ 10 | Teléfono con letras               | DATOS_INVALIDOS       | DATOS_INVALIDOS       | PASA
+ 11 | Reservar 14:00 tras cancelar      | OK                    | OK                    | PASA
+ 12 | anon puede insertar mesas         | false                 | false                 | PASA
+ 13 | anon puede leer reservas          | false                 | false                 | PASA
+ 14 | anon puede borrar platos          | false                 | false                 | PASA
+ 15 | anon puede ejecutar crear_reserva | true                  | true                  | PASA
+ 16 | RLS activo en las 4 tablas        | 4                     | 4                     | PASA
+(16 rows)
+
