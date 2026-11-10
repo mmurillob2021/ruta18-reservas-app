@@ -1,0 +1,10 @@
+# Solo se sube lo necesario para construir el sitio (scripts/build.mjs)
+.env
+.env.*
+!.env.example
+dist
+node_modules
+docs
+supabase
+tests
+*.code-workspace

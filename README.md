@@ -17,7 +17,7 @@ Una aplicación web donde el cliente reserva una mesa por su cuenta y ve la disp
 |---|---|
 | Aplicación en Vercel | https://ruta18-reservas-app.vercel.app · panel en [/admin](https://ruta18-reservas-app.vercel.app/admin) |
 | Repositorio | https://github.com/mmurillob2021/ruta18-reservas-app |
-| Video de demostración | _Pendiente_ |
+| Video de demostración | https://www.loom.com/share/dffc00b8c9e54d25b5ecfd0d9aa393b6 |
 | Archivo de Figma | [Diseño](https://www.figma.com/design/cuSkj1NPd49957RoBRP3CU/ruta18_Mesas) · [Prototipo navegable](https://www.figma.com/proto/cuSkj1NPd49957RoBRP3CU/ruta18_Mesas?node-id=3-36551&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1) |
 | Documento de proyecto | [docs/Ruta18_Documento_Proyecto_Mauricio_Murillo.docx](docs/Ruta18_Documento_Proyecto_Mauricio_Murillo.docx) |
 | Mockups de baja fidelidad | [docs/mockups/](docs/mockups/) |
@@ -103,8 +103,8 @@ ruta18-reservas-app/
 | RF-14 | Gestión de la carta | Implementado y probado |
 | RNF-01 | Usabilidad: reservar en 3 pasos dentro de un solo modal | Implementado |
 | RNF-02 | Responsividad: 375, 768 y 1440 px sin scroll horizontal | Probado |
-| RNF-03 | Rendimiento: Lighthouse móvil 94 | Probado |
-| RNF-04 | Disponibilidad: Vercel y Supabase | Pendiente del despliegue |
+| RNF-03 | Rendimiento: Lighthouse móvil 97 en producción | Probado |
+| RNF-04 | Disponibilidad: Vercel y Supabase | Desplegado |
 | RNF-05 | Seguridad: RLS, Supabase Auth, CSP, `textContent` | Probado |
 | RNF-06 | Mantenibilidad: lógica pura separada del DOM | Implementado |
 | RNF-07 | Compatibilidad: solo APIs estándar | Probado en Chrome, falta Firefox o Safari |
@@ -116,14 +116,14 @@ ruta18-reservas-app/
 - Automáticas: `npm test` sobre `js/logica.js` (27 pruebas, todas pasan).
 - Base de datos: `supabase/pruebas.sql` en el SQL Editor (16 casos: doble reserva, validaciones de `crear_reserva` y permisos del rol anon).
 - Navegador: casos CP-01 a CP-20 del documento. 19 pasan y CP-20 queda pendiente de probar en un segundo navegador. Resultados y capturas en [docs/evidencias/](docs/evidencias/fase5-plan-de-pruebas.md).
-- Lighthouse móvil: rendimiento 94, accesibilidad 100, buenas prácticas 100, SEO 100.
+- Lighthouse móvil en producción: rendimiento 97, accesibilidad 100, buenas prácticas 100, SEO 100.
+- Producción: [docs/evidencias/fase6-produccion.md](docs/evidencias/fase6-produccion.md).
 
 ## Pendientes del autor
 
 - Logo e imagen del hero propios en `assets/img/` (hoy se usa el sello "18" del diseño de Figma).
 - Carta real con precios en lugar de los platos de ejemplo de `supabase/seed.sql`.
 - Instagram y Facebook en `js/config.js` (el pie los oculta mientras estén vacíos) y confirmar el teléfono.
-- Video de demostración.
 
 ## Nota de seguridad
 

@@ -4,7 +4,7 @@ Fecha de ejecución: 9 de noviembre de 2026.
 
 Entorno: Supabase local (CLI 2.58.5, PostgreSQL 17, PostgREST y Auth) con `supabase/schema.sql` y `supabase/seed.sql`, el registro de usuarios desactivado y el usuario `admin@ruta18.app`. El sitio se sirvió desde `dist/` con las mismas cabeceras de `vercel.json` (CSP incluida) y se probó con Google Chrome automatizado.
 
-Pendiente: repetir CP-05, CP-12 y CP-17 en el despliegue de Vercel con el proyecto real de Supabase.
+Verificación en producción (Vercel y Supabase en la nube): [fase6-produccion.md](fase6-produccion.md).
 
 ## Pruebas automáticas
 
